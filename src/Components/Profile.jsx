@@ -1,5 +1,5 @@
 import { useDispatch, useSelector } from "react-redux";
-import FeedCards from "./feedCards";
+import FeedCards from "./FeedCards";
 import { useState, useEffect } from "react";
 import { BaseUrl } from "../Utils/constants";
 import axios from "axios";
