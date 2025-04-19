@@ -3,7 +3,7 @@ import { BaseUrl } from "../Utils/constants";
 import axios from "axios";
 import { addFeed, removeFeed } from "../Utils/feedSlice";
 import { useEffect } from "react";
-import FeedCards from "./feedCards";
+import FeedCards from "./FeedCards";
 
 const Feed = ()=>{
 
