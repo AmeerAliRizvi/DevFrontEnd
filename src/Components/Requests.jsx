@@ -15,7 +15,7 @@ const Requests = () => {
 
   const reviewRequest = async (status, req) => {
     try {
-      console.log("Reviewing request:", status, req);
+      
 
       await axios.post(`${BaseUrl}/request/review/${status}/${req._id}`, {}, {
         withCredentials: true,
@@ -30,12 +30,11 @@ const Requests = () => {
 
       setToastMessage(message);
       setShowReqToast(true);
-      console.log("Toast should be visible now:", message);
+     
 
       // Hide toast after 3 seconds
       setTimeout(() => {
         setShowReqToast(false);
-        console.log("Toast hidden");
       }, 9000);
       
     } catch (err) {
@@ -45,12 +44,12 @@ const Requests = () => {
 
   const getRequest = async () => {
     try {
-      console.log("Fetching requests...");
+      
       const res = await axios.get(BaseUrl + "/user/request/recieved", {
         withCredentials: true,
       });
 
-      console.log("Received requests:", res?.data?.data);
+      
       dispatch(addRequest(res?.data?.data));
     } catch (err) {
       console.error("Error fetching requests:", err);
@@ -58,7 +57,7 @@ const Requests = () => {
   };
 
   useEffect(() => {
-    console.log("Component mounted, calling getRequest...");
+    
     getRequest();
   }, []);
 
@@ -71,7 +70,7 @@ const Requests = () => {
       <h1 className="text-white text-center text-4xl font-extrabold mb-8 tracking-wide">Pending Requests</h1>
       <div className="flex flex-col gap-6">
         {requests.map((req) => {
-          console.log("Rendering request:", req);
+          
           const { firstName, lastName, age, gender, About, _id, photoUrl } = req.fromUserId;
           return (
             <div

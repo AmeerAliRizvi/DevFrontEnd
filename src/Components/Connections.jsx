@@ -8,7 +8,7 @@ import { FaMars, FaVenus } from "react-icons/fa"; // Dynamic gender icons
 const Connections = () => {
   const dispatch = useDispatch();
   const connections = useSelector((store) => store.connection);
-  console.log("Connections: ", connections);
+ 
 
   const getConnections = async () => {
     try {
