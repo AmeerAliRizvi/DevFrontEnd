@@ -1,5 +1,6 @@
 import axios from "axios";
 import { BaseUrl } from "../Utils/constants";
+import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { addConnections } from "../Utils/connectionSlice";
 import { useEffect } from "react";
@@ -55,7 +56,7 @@ const Connections = () => {
 
             {/* Action Buttons */}
             <div className="flex gap-4">
-              <button className="bg-purple-500 hover:bg-purple-600 px-6 py-2 text-lg rounded-full shadow-lg transition-all">Message</button>
+              <Link to = {"/chat/"}><button className="bg-purple-500 hover:bg-purple-600 px-6 py-2 text-lg rounded-full shadow-lg transition-all">Message</button></Link>
               <button className="bg-red-500 hover:bg-red-600 px-5 py-2 text-lg rounded-full shadow-lg transition-all">Remove</button>
             </div>
           </div>
