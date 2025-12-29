@@ -1,55 +1,24 @@
-import { useState, useEffect } from "react";
-import axios from "axios";
+import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { addRequest, removeRequest } from "../Utils/requestSlice";
-import { FaMars, FaVenus } from "react-icons/fa"; // Dynamic gender icons
-import { BaseUrl } from "../Utils/constants";
+import { addRequest, removeRequest } from "../Utils/requestSlice"; // Check path case sensitivity
+import { addOneConnection } from "../Utils/connectionSlice";     // Check path case sensitivity
+import api from "../utils/axiosClient";
+import { Check, X, ShieldAlert, Cpu } from "lucide-react"; // Cpu icon for skills
+import { motion, AnimatePresence } from "framer-motion";
 
 const Requests = () => {
   const dispatch = useDispatch();
   const requests = useSelector((store) => store.request);
 
-  // Toast state
+  // Toast State
   const [showReqToast, setShowReqToast] = useState(false);
   const [toastMessage, setToastMessage] = useState("");
+  const [toastType, setToastType] = useState("success");
 
-  const reviewRequest = async (status, req) => {
-    try {
-      
-
-      await axios.post(`${BaseUrl}/request/review/${status}/${req._id}`, {}, {
-        withCredentials: true,
-      });
-
-      dispatch(removeRequest(req._id)); // Remove request from Redux state
-
-      // Set the message dynamically
-      const message = status === "accepted" 
-        ? `${req.fromUserId.firstName} ${req.fromUserId.lastName} added to your connections.` 
-        : `${req.fromUserId.firstName} ${req.fromUserId.lastName} was rejected.`;
-
-      setToastMessage(message);
-      setShowReqToast(true);
-     
-
-      // Hide toast after 3 seconds
-      setTimeout(() => {
-        setShowReqToast(false);
-      }, 9000);
-      
-    } catch (err) {
-      console.error("Error in reviewing request:", err);
-    }
-  };
-
+  // 1. Fetch Requests
   const getRequest = async () => {
     try {
-      
-      const res = await axios.get(BaseUrl + "/user/request/recieved", {
-        withCredentials: true,
-      });
-
-      
+      const res = await api.get("/user/request/recieved", { withCredentials: true });
       dispatch(addRequest(res?.data?.data));
     } catch (err) {
       console.error("Error fetching requests:", err);
@@ -57,69 +26,193 @@ const Requests = () => {
   };
 
   useEffect(() => {
-    
     getRequest();
   }, []);
 
-  if (!requests || requests.length === 0) {
-    return <p className="text-white text-center text-xl">No Pending Requests</p>;
-  }
+  // 2. Review Logic
+  const reviewRequest = async (status, req) => {
+    try {
+      await api.post(`/request/review/${status}/${req._id}`, {}, { withCredentials: true });
+
+      // Redux Updates
+      dispatch(removeRequest(req._id));
+      if (status === "accepted") {
+        dispatch(addOneConnection(req.fromUserId));
+      }
+
+      // Toast Logic
+      const message = status === "accepted" 
+        ? `You are now connected with ${req.fromUserId.firstName}.` 
+        : `Request ignored.`;
+
+      setToastMessage(message);
+      setToastType(status === "accepted" ? "success" : "error");
+      setShowReqToast(true);
+
+      setTimeout(() => setShowReqToast(false), 4000);
+      
+    } catch (err) {
+      console.error("Error in reviewing request:", err);
+    }
+  };
+
+  if (!requests) return null;
 
   return (
-    <div className="flex flex-col items-center min-h-screen p-6 bg-[var(--BGBase300)]">
-      <h1 className="text-white text-center text-4xl font-extrabold mb-8 tracking-wide">Pending Requests</h1>
-      <div className="flex flex-col gap-6">
-        {requests.map((req) => {
-          
-          const { firstName, lastName, age, gender, About, _id, photoUrl } = req.fromUserId;
-          return (
-            <div
-              key={_id}
-              className="bg-white/10 backdrop-blur-md p-8 rounded-3xl shadow-xl text-white flex items-center w-[650px] hover:shadow-2xl transition-all duration-300 border border-gray-700"
-            >
-              {/* Profile Image */}
-              <img
-                src={photoUrl}
-                alt={firstName}
-                className="w-24 h-24 rounded-full border-4 border-purple-500 shadow-xl mr-6"
-              />
-
-              {/* User Details */}
-              <div className="flex-1">
-                <h2 className="text-2xl font-bold">{firstName} {lastName}</h2>
-                <p className="text-gray-400 flex items-center gap-2 text-lg mt-1">
-                  {gender.toLowerCase() === "male" ? <FaMars className="text-blue-400" /> : <FaVenus className="text-pink-400" />} {age}
-                </p>
-                <p className="text-md mt-3 text-gray-300 italic">{About || "No bio available"}</p>
-              </div>
-
-              {/* Action Buttons */}
-              <div className="flex gap-4">
-                <button 
-                  className="bg-green-500 hover:bg-green-600 px-6 py-2 text-lg rounded-full shadow-lg transition-all"
-                  onClick={() => reviewRequest("accepted", req)}
-                >
-                  Accept
-                </button>
-                <button 
-                  className="bg-red-500 hover:bg-red-600 px-5 py-2 text-lg rounded-full shadow-lg transition-all"
-                  onClick={() => reviewRequest("rejected", req)}
-                >
-                  Reject
-                </button>
-              </div>
-            </div>
-          );
-        })}
-      </div>
+    <div className="min-h-screen bg-gray-50 py-10 px-4 md:px-8 relative">
+      <div className="max-w-4xl mx-auto">
         
-      {/* Toast Notification */}
-      {showReqToast && (
-        <div className="fixed top-10 left-1/2 transform -translate-x-1/2 bg-green-500 text-white px-6 py-3 rounded-lg shadow-lg z-50 animate-fadeIn">
-          {toastMessage}
+        {/* Header */}
+        <div className="mb-8 flex items-end justify-between border-b border-gray-200 pb-4">
+            <div>
+                <h1 className="text-3xl font-extrabold text-gray-900 tracking-tight">
+                    Pending Requests
+                </h1>
+                <p className="text-gray-500 mt-1">
+                    You have <span className="text-purple-600 font-bold">{requests.length}</span> new people waiting
+                </p>
+            </div>
         </div>
+
+        {/* List Container */}
+        <div className="flex flex-col gap-5">
+          <AnimatePresence mode="popLayout">
+            {requests.length > 0 ? (
+              requests.map((req) => (
+                <RequestCard 
+                  key={req._id} 
+                  req={req} 
+                  onReview={reviewRequest} 
+                />
+              ))
+            ) : (
+              // Empty State
+              <motion.div 
+                initial={{ opacity: 0 }} animate={{ opacity: 1 }}
+                className="flex flex-col items-center justify-center py-24 text-center bg-white rounded-2xl border border-gray-100 shadow-sm"
+              >
+                <div className="w-16 h-16 bg-gray-50 rounded-full flex items-center justify-center mb-4 text-gray-300">
+                  <ShieldAlert size={32} />
+                </div>
+                <h3 className="text-lg font-bold text-gray-500">No pending requests</h3>
+                <p className="text-gray-400 mt-1">Go explore to find new connections.</p>
+              </motion.div>
+            )}
+          </AnimatePresence>
+        </div>
+      </div>
+
+      {/* Simple Toast */}
+      {showReqToast && (
+          <div className={`fixed bottom-10 left-1/2 transform -translate-x-1/2 px-6 py-3 rounded-xl shadow-xl z-50 font-medium text-white ${toastType === 'success' ? 'bg-gray-900' : 'bg-red-500'}`}>
+            {toastMessage}
+          </div>
       )}
     </div>
+  );
+};
+
+// --- Sub-Component: Request Card (Matches Connections Style) ---
+const RequestCard = ({ req, onReview }) => {
+  const { fromUserId } = req;
+  if (!fromUserId) return null;
+
+  const { 
+    firstName, 
+    lastName, 
+    photoUrl = "https://via.placeholder.com/150", 
+    title,
+    skills // Assuming skills is an array like ["React", "Node", "MongoDB", "Express"]
+  } = fromUserId;
+
+  // --- Skills Logic ---
+  // Ensure skills is an array (fallback to empty array if null/undefined)
+  const safeSkills = Array.isArray(skills) ? skills : [];
+  const displayedSkills = safeSkills.slice(0, 3); // Take first 3
+  const remainingSkillsCount = safeSkills.length - 3; // Calculate remaining
+
+  return (
+    <motion.div
+      layout
+      initial={{ opacity: 0, y: 10 }}
+      animate={{ opacity: 1, y: 0 }}
+      exit={{ opacity: 0, x: -50, transition: { duration: 0.2 } }}
+      className="group bg-white rounded-2xl p-5 sm:p-6 border border-gray-100 shadow-sm hover:shadow-xl hover:border-purple-100 transition-all duration-300 flex flex-col sm:flex-row items-center gap-6"
+    >
+      
+      {/* 1. Avatar */}
+      <div className="relative shrink-0">
+        <img
+          src={photoUrl}
+          alt={firstName}
+          className="w-20 h-20 sm:w-24 sm:h-24 rounded-full object-cover border-[3px] border-purple-100"
+          onError={(e) => { e.target.src = 'https://via.placeholder.com/150'; }}
+        />
+      </div>
+
+      {/* 2. Info (Middle) */}
+      <div className="flex-1 text-center sm:text-left min-w-0 w-full">
+        <h2 className="text-xl font-bold text-gray-900 truncate">
+          {firstName} {lastName}
+        </h2>
+        
+        {/* Title */}
+        <p className="text-purple-500 text-sm font-medium mb-3">
+          {title || "Developer"}
+        </p>
+
+        {/* SKILLS SECTION */}
+        <div className="flex flex-wrap justify-center sm:justify-start gap-2">
+            {safeSkills.length > 0 ? (
+                <>
+                    {displayedSkills.map((skill, index) => (
+                        <span 
+                            key={index} 
+                            className="bg-gray-100 text-gray-600 px-3 py-1 rounded-lg text-xs font-semibold border border-gray-200"
+                        >
+                            {skill}
+                        </span>
+                    ))}
+                    
+                    {/* The "+X more" Badge */}
+                    {remainingSkillsCount > 0 && (
+                        <span className="bg-purple-50 text-purple-600 px-2 py-1 rounded-lg text-xs font-bold border border-purple-100 flex items-center">
+                            +{remainingSkillsCount}
+                        </span>
+                    )}
+                </>
+            ) : (
+                <span className="text-xs text-gray-400 italic flex items-center gap-1">
+                    <Cpu size={12} /> No skills listed
+                </span>
+            )}
+        </div>
+      </div>
+
+      {/* 3. Actions (Right) */}
+      <div className="flex sm:flex-col gap-3 w-full sm:w-auto mt-2 sm:mt-0">
+        
+        {/* Accept Button (Styled like your 'Message' button) */}
+        <button
+          onClick={() => onReview("accepted", req)}
+          className="flex-1 sm:flex-none w-full sm:w-36 flex items-center justify-center gap-2 bg-purple-600 hover:bg-purple-700 text-white py-2.5 px-4 rounded-xl font-semibold shadow-md shadow-purple-100 transition-all"
+        >
+          <Check size={18} />
+          Accept
+        </button>
+        
+        {/* Reject Button (Styled like your 'Remove' button) */}
+        <button
+          onClick={() => onReview("rejected", req)}
+          className="flex-1 sm:flex-none w-full sm:w-36 flex items-center justify-center gap-2 bg-white border border-gray-200 text-gray-500 hover:text-red-600 hover:border-red-200 hover:bg-red-50 py-2.5 px-4 rounded-xl font-medium transition-all"
+        >
+          <X size={18} />
+          Reject
+        </button>
+
+      </div>
+
+    </motion.div>
   );
 };
 
