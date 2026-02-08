@@ -7,16 +7,11 @@ import {
     Code, Activity, Sparkles, MessageSquare
 } from 'lucide-react';
 
-// =====================================================================
-// 1. UI HELPERS & SKELETONS
-// =====================================================================
-
 const ensureProtocol = (url) => {
     if (!url) return "";
     return url.startsWith('http') ? url : `https://${url}`;
 };
 
-// Reusable Card with a bit more "pop" for the view mode
 const Card = ({ children, className = "" }) => (
     <div className={`bg-white/80 backdrop-blur-md rounded-3xl border border-white/50 shadow-[0_8px_30px_rgba(0,0,0,0.04)] ${className}`}>
         {children}
@@ -38,10 +33,6 @@ const ProfileSkeleton = () => (
     </div>
 );
 
-// =====================================================================
-// 2. MAIN VIEW COMPONENT
-// =====================================================================
-
 const UserProfile = () => {
     const { userId } = useParams();
     const navigate = useNavigate();
@@ -54,13 +45,9 @@ const UserProfile = () => {
     useEffect(() => {
         const fetchProfile = async () => {
             try {
-                // Simulating API delay to show off the skeleton
-                // Replace with: const res = await api.get(`/profile/view/${userId}`);
                 const res = await api.get("/profile/view/" + userId);
                 setUser(res.data.data);
                 
-                // You would also fetch connection status here
-                // setConnectionStatus(res.data.connectionStatus); 
             } catch (err) {
                 console.error("Failed to fetch user", err);
                 // navigate("/feed"); // Redirect if user not found
@@ -74,8 +61,8 @@ const UserProfile = () => {
     // Handle Connection Actions
     const handleConnect = async (status) => {
         try {
-            // await api.post(`/request/send/${status}/${user._id}`);
-            setConnectionStatus(status); // Optimistic UI update
+            
+            setConnectionStatus(status);
         } catch (err) {
             console.error(err);
         }
@@ -87,13 +74,12 @@ const UserProfile = () => {
     return (
         <div className="min-h-screen bg-[#F8F9FB] font-inter text-gray-800 relative overflow-x-hidden">
             
-            {/* Background Decoration */}
+           
             <div className="absolute top-0 left-0 w-full h-[500px] bg-gradient-to-b from-purple-100/50 to-transparent pointer-events-none" />
             <div className="absolute -top-40 -right-40 w-[600px] h-[600px] bg-indigo-200/30 rounded-full blur-3xl pointer-events-none" />
 
             <div className="relative z-10 max-w-6xl mx-auto p-6 md:p-12 space-y-8">
-                
-                {/* --- HEADER SECTION --- */}
+             
                 <Card className="p-0 overflow-hidden group">
                     {/* Decorative Banner */}
                     <div className="h-32 bg-gradient-to-r from-violet-600 to-indigo-600 relative overflow-hidden">
@@ -127,39 +113,10 @@ const UserProfile = () => {
                                 <p className="text-lg text-purple-600 font-semibold mt-1 mb-2">
                                     {user.title || "Developer"}
                                 </p>
-                                <div className="flex flex-wrap items-center justify-center md:justify-start gap-y-2 gap-x-4 text-sm text-gray-500 font-medium">
-                                    <span className="flex items-center gap-1.5"><MapPin size={16}/> {user.location || "Remote"}</span>
-                                    <span className="flex items-center gap-1.5 capitalize"><Activity size={16}/> {user.gender}</span>
-                                    {user.age && <span className="flex items-center gap-1.5"><Calendar size={16}/> {user.age} years old</span>}
+                                <div className={`w-fit shrink-0 px-4 py-1.5 rounded-full text-xs font-bold border flex items-center gap-2 ${user.status === 'open' ? 'bg-emerald-50 text-emerald-700 border-emerald-200' : 'bg-amber-50 text-amber-700 border-amber-200'}`}>
+                                            <span className={`w-2 h-2 rounded-full ${user.status === 'open' ? 'bg-emerald-500 animate-pulse' : 'bg-amber-500'}`} />
+                                            {user.status === 'open' ? 'OPEN TO TEAM' : 'IN A TEAM'}
                                 </div>
-                            </div>
-
-                            {/* --- ACTION BUTTONS (The Match/Connect Logic) --- */}
-                            <div className="w-full md:w-auto flex items-center justify-center gap-3 mt-4 md:mt-0">
-                                {connectionStatus === "accepted" ? (
-                                    <button className="flex items-center gap-2 px-6 py-3 rounded-xl bg-emerald-100 text-emerald-700 font-bold cursor-default">
-                                        <UserCheck size={20} /> Connected
-                                    </button>
-                                ) : connectionStatus === "interested" ? (
-                                    <button className="flex items-center gap-2 px-6 py-3 rounded-xl bg-gray-100 text-gray-500 font-bold cursor-default">
-                                        <Check size={20} /> Request Sent
-                                    </button>
-                                ) : (
-                                    <>
-                                        <button 
-                                            onClick={() => handleConnect('ignored')}
-                                            className="p-3 rounded-xl border-2 border-gray-200 text-gray-400 hover:border-red-200 hover:text-red-500 hover:bg-red-50 transition-all"
-                                        >
-                                            <X size={24} />
-                                        </button>
-                                        <button 
-                                            onClick={() => handleConnect('interested')}
-                                            className="flex-1 md:flex-none flex items-center gap-2 px-8 py-3 rounded-xl bg-gray-900 text-white font-bold hover:bg-black hover:shadow-lg hover:scale-105 transition-all active:scale-95"
-                                        >
-                                            <UserPlus size={20} /> Connect
-                                        </button>
-                                    </>
-                                )}
                             </div>
                         </div>
                     </div>

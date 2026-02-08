@@ -1,7 +1,6 @@
 import { NavLink, useLocation } from "react-router-dom";
 import { motion } from "framer-motion";
 
-// Assuming these icons are correctly implemented
 import HomeIcon from "../assets/HomeIcon";
 import ChatIcon from "../assets/ChatIcon";
 import ConnectionsIcon from "../assets/ConnectionsIcon";
@@ -9,21 +8,19 @@ import RequestsIcon from "../assets/RequestsIcon";
 import LogoutButton from "./LogoutButton";
 import { useSelector } from "react-redux";
 
-// --- Configuration Data ---
 const menuItems = [
   { name: "Home", path: "/feed", icon: HomeIcon },
-  { name: "Chats", path: "/chats", icon: ChatIcon },
+  { name: "Chats", path: "/chat", icon: ChatIcon },
   { name: "Connections", path: "/connections", icon: ConnectionsIcon },
   { name: "Requests", path: "/requests", icon: RequestsIcon },
 ];
 
-// --- Enhanced MenuItem Component: Backlit Glow Design (Icon Size Updated) ---
 
 const MenuItem = ({ name, path, Icon, active, index }) => {
-  // Base classes for the inner content container - simplified and flatter
+ 
   const baseClasses = "flex items-center gap-4 px-8 py-3.5 transition-all duration-300 ease-in-out cursor-pointer relative group rounded-r-xl";
   
-  // ICON SIZE INCREASED from w-7 h-7 to w-8 h-8
+
   const iconClasses = "w-15 h-15 transition-all duration-300 ease-in-out";
 
   return (
@@ -45,7 +42,6 @@ const MenuItem = ({ name, path, Icon, active, index }) => {
             }
           `}
         >
-          {/* Accent Line Indicator */}
           {active && (
             <motion.div
               layoutId="accent-line" 
@@ -57,7 +53,6 @@ const MenuItem = ({ name, path, Icon, active, index }) => {
             />
           )}
 
-          {/* Icon - Now w-8 h-8 */}
           <Icon
             className={`
               ${iconClasses} 
@@ -66,7 +61,6 @@ const MenuItem = ({ name, path, Icon, active, index }) => {
             aria-hidden="true"
           />
 
-          {/* Link Text */}
           <span className="text-lg">
             {name}
           </span>
@@ -75,9 +69,6 @@ const MenuItem = ({ name, path, Icon, active, index }) => {
     </motion.div>
   );
 };
-
-
-// --- Full SideBar Component (Unchanged from the previous version, only MenuItem is updated) ---
 
 export default function SideBar() {
 
@@ -94,7 +85,6 @@ export default function SideBar() {
   return (
     <div className={sidebarClasses} aria-label="Main Navigation Sidebar">
       
-      {/* 🚀 Logo Section */}
       <div className="px-8 pt-12 pb-10">
         <div className="flex items-center gap-3">
           <div className="
@@ -118,7 +108,6 @@ export default function SideBar() {
 
       <hr className="mx-8 border-t border-[#ede7f6] mb-2" aria-hidden="true" />
 
-      {/* 🧭 Navigation Section */}
       <nav className="flex flex-col gap-1" role="navigation" aria-label="Main Menu">
         <ul role="list">
           {menuItems.map((item, i) => (
@@ -134,7 +123,7 @@ export default function SideBar() {
         </ul>
       </nav>
       <LogoutButton/>
-      <div className="flex-1" aria-hidden="true" /> {/* Spacer */}
+      <div className="flex-1" aria-hidden="true" /> 
 
       {/* 👤 Profile Section */}
       <div className="px-8 py-8 border-t border-[#ede7f6]">

@@ -9,11 +9,7 @@ import {
 } from 'lucide-react';
 import api from '../utils/axiosClient';
 
-// =====================================================================
-// 1. UI HELPERS & COMPONENTS
-// =====================================================================
 
-// Helper: Ensure links have http/https
 const ensureProtocol = (url) => {
     if (!url) return "";
     return url.startsWith('http') ? url : `https://${url}`;
@@ -63,9 +59,6 @@ const Toast = ({ message, type, onClose }) => {
     );
 };
 
-// =====================================================================
-// 2. MAIN PAGE COMPONENT
-// =====================================================================
 
 export default function UserProfilePage() {
     const user = useSelector((store) => store.user);
@@ -246,7 +239,7 @@ export default function UserProfilePage() {
                                     ) : (
                                         <div className={`px-4 py-1.5 rounded-full text-xs font-bold border flex items-center gap-2 ${user.status === 'open' ? 'bg-emerald-50 text-emerald-700 border-emerald-200' : 'bg-amber-50 text-amber-700 border-amber-200'}`}>
                                             <span className={`w-2 h-2 rounded-full ${user.status === 'open' ? 'bg-emerald-500 animate-pulse' : 'bg-amber-500'}`} />
-                                            {user.status === 'open' ? 'OPEN TO WORK' : 'IN A TEAM'}
+                                            {user.status === 'open' ? 'OPEN TO TEAM' : 'IN A TEAM'}
                                         </div>
                                     )}
                                 </div>

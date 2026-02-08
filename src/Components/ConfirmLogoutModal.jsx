@@ -3,10 +3,9 @@ import { createPortal } from "react-dom";
 
 const ConfirmLogoutModal = ({ onCancel, onConfirm, loading }) => {
     useEffect(() => {
-  // modal mounted → stop scroll
+
   document.body.style.overflow = "hidden";
 
-  // modal unmounted → restore scroll
   return () => {
     document.body.style.overflow = "auto";
   };

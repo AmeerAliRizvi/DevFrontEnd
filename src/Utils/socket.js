@@ -1,6 +1,13 @@
-import { io } from "socket.io-client";
+
 import { BaseUrl } from "./constant"
 
-export const createSocketConnection = ()=>{
-    return io(BaseUrl)
-}
+import io from "socket.io-client";
+
+let socket;
+
+export const createSocketConnection = () => {
+  if (!socket) {
+    socket = io(BaseUrl); //backend URL
+  }
+  return socket;
+};

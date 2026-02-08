@@ -8,7 +8,7 @@ const ProfileWarning = () => {
 
   if (!user) return null;
 
-  // Logic: Check if essential fields are missing
+  //Check if essential fields are missing
   const isProfileIncomplete = 
     !user.about || 
     !user.skills || 
@@ -16,7 +16,6 @@ const ProfileWarning = () => {
     !user.externalLinks?.github || 
     !user.externalLinks?.linkedin;
 
-  // If profile is complete, don't render anything
   if (!isProfileIncomplete) return null;
 
   return (

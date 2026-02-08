@@ -16,20 +16,13 @@ const UserCard = ({ user, onAction, onClick }) => {
     _id
   } = user;
 
-  // --- LOGIC ---
-
-  // 1. Status Logic
   const normalizedStatus = status ? status.toLowerCase() : 'open';
   const isInTeam = normalizedStatus.includes('in_team') || normalizedStatus.includes('in-team');
 
-  // 2. Title Fallback
   const displayTitle = title || 'Software Engineer';
 
-  // 3. Bio Fallback
-  // If about exists, use it. If not, use placeholder.
   const displayAbout = about && about.trim().length > 0 ? about : "No bio available.";
 
-  // 4. Skills Logic
   const safeSkills = Array.isArray(skills) ? skills : [];
   const displaySkills = safeSkills.slice(0, 3);
   const remainingSkills = safeSkills.length - 3;
@@ -44,18 +37,15 @@ const UserCard = ({ user, onAction, onClick }) => {
       className="group relative w-full max-w-[320px] mx-auto bg-white rounded-[24px] overflow-hidden shadow-lg shadow-gray-100 border border-gray-100 flex flex-col h-full"
     >
       
-      {/* --- HEADER --- */}
-      {/* Blue for Team, Purple for Open */}
-      <div className={`h-24 w-full relative transition-colors duration-300 ${isInTeam ? 'bg-blue-50' : 'bg-purple-50'}`}>
-        {/* Pattern */}
-        <div className="absolute inset-0 opacity-30" style={{ backgroundImage: `radial-gradient(${isInTeam ? '#3b82f6' : '#a855f7'} 0.5px, transparent 0)`, backgroundSize: '10px 10px' }}></div>
+      <div className={`h-24 w-full relative transition-colors duration-300 ${isInTeam ? 'bg-amber-50' : 'bg-purple-50'}`}>
+       
+        <div className="absolute inset-0 opacity-30" style={{ backgroundImage: `radial-gradient(${isInTeam ? '#10b981' : '#a855f7'} 0.5px, transparent 0)`, backgroundSize: '10px 10px' }}></div>
 
-        {/* STATUS PILL (Top Right) - Purely Visual */}
         <div className={`
           absolute top-3 right-3 px-3 py-1.5 rounded-full text-[10px] font-bold uppercase tracking-wider 
           flex items-center gap-1.5 border shadow-sm bg-white
           ${isInTeam 
-            ? 'text-blue-600 border-blue-100' 
+            ? 'text-amber-600 border-amber-100' 
             : 'text-purple-600 border-purple-100'}
         `}>
           {isInTeam ? (
@@ -66,10 +56,8 @@ const UserCard = ({ user, onAction, onClick }) => {
         </div>
       </div>
 
-      {/* --- BODY --- */}
       <div className="px-5 relative flex flex-col items-center -mt-12 flex-1">
         
-        {/* Avatar */}
         <div className="mb-3">
           <div className="p-1.5 bg-white rounded-2xl shadow-sm">
             <img 
@@ -80,21 +68,19 @@ const UserCard = ({ user, onAction, onClick }) => {
             />
           </div>
         </div>
-
-        {/* Text Content */}
         <div className="text-center w-full">
           <h2 className="text-xl font-bold text-gray-900 truncate px-1">
             {firstName} {lastName}
           </h2>
           
           <div className="flex items-center justify-center gap-1.5 mt-1">
-            <Briefcase size={12} className={isInTeam ? "text-blue-400" : "text-gray-400"} />
-            <p className={`text-xs font-bold uppercase tracking-wide truncate max-w-[200px] ${isInTeam ? 'text-blue-600' : 'text-purple-600'}`}>
+            <Briefcase size={12} className={isInTeam ? "text-amber-400" : "text-gray-400"} />
+            <p className={`text-xs font-bold uppercase tracking-wide truncate max-w-[200px] ${isInTeam ? 'text-amber-600' : 'text-purple-600'}`}>
                {displayTitle}
             </p>
           </div>
 
-          {/* ABOUT SECTION: Handles long text with "..." */}
+          {/* ABOUT SECTION */}
           <p className="text-sm text-gray-500 mt-3 leading-relaxed line-clamp-2 min-h-[2.5rem] px-1" title={displayAbout}>
             {displayAbout}
           </p>
@@ -108,7 +94,7 @@ const UserCard = ({ user, onAction, onClick }) => {
                 <span key={i} className={`
                   px-2.5 py-1 text-[10px] font-bold uppercase tracking-wide rounded-lg border 
                   ${isInTeam 
-                    ? 'bg-blue-50 text-blue-600 border-blue-100' 
+                    ? 'bg-amber-50 text-amber-600 border-amber-100' 
                     : 'bg-gray-50 text-gray-600 border-gray-100'}
                 `}>
                   {skill}
@@ -118,7 +104,7 @@ const UserCard = ({ user, onAction, onClick }) => {
                 <span className={`
                   px-2 py-1 text-[10px] font-bold rounded-lg border
                   ${isInTeam 
-                    ? 'bg-blue-50 text-blue-500 border-blue-100' 
+                    ? 'bg-amber-50 text-amber-500 border-amber-100' 
                     : 'bg-purple-50 text-purple-500 border-purple-100'}
                 `}>
                   +{remainingSkills}
@@ -144,13 +130,13 @@ const UserCard = ({ user, onAction, onClick }) => {
           <X size={20} />
         </button>
 
-        {/* Connect Button - Always Available */}
+        {/* Connect Button */}
         <button 
           onClick={(e) => { e.stopPropagation(); onAction('interested', _id); }}
           className={`
             flex-1 h-12 rounded-xl font-bold text-sm shadow-md transition-all flex items-center justify-center gap-2 text-white
             ${isInTeam 
-              ? 'bg-blue-500 hover:bg-blue-600 hover:shadow-blue-200' // Blue, but active and bright
+              ? 'bg-amber-500 hover:bg-amber-600 hover:shadow-amber-200' 
               : 'bg-purple-600 hover:bg-purple-700 hover:shadow-purple-200 hover:-translate-y-0.5'}
           `}
         >

@@ -12,6 +12,8 @@ import Requests from "./Requests";
 import SideBar from "./SideBar";
 import Profile from "./Profile";
 import UserProfile from "./UserProfile";
+import Chat from "./Chat";
+import ChatPage from "./ChatPage";
 
 function App() {
   return (
@@ -43,6 +45,10 @@ function App() {
           <Route path="/requests" element={<Requests />} />
           <Route path="/profile" element={<Profile/>} />
           <Route path = "/profile/view/:userId" element = {<UserProfile/>}/>
+          <Route path="/chat" element={<ChatPage />} />
+        
+     
+        <Route path="/chat/:toUserId" element={<ChatPage />} />
         </Route>
       </Route>
 

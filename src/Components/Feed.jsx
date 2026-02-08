@@ -17,7 +17,6 @@ const Feed = () => {
   const [hasMore, setHasMore] = useState(true);
 
   // Use a ref to track if we are currently fetching to prevent race conditions
-  // that simple state sometimes misses in strict mode
   const isFetchingRef = useRef(false);
 
   const loadMoreRef = useRef(null);
@@ -54,15 +53,13 @@ const Feed = () => {
     }
   }, [feed, hasMore, dispatch]);
 
-  // ✅ INITIAL LOAD
   useEffect(() => {
     // Only fetch if feed is empty and we haven't determined there is no more data
     if (feed.length === 0 && hasMore) {
       getFeed();
     }
-  }, []); // Run once on mount
+  }, []); 
 
-  // ✅ INFINITE SCROLL
   useEffect(() => {
     if (!loadMoreRef.current || !hasMore) return;
 
@@ -120,7 +117,7 @@ const Feed = () => {
     <SearchUsers />
 
     <div className="max-w-7xl mx-auto px-4 py-8">
-      {/* 🔴 REMOVED 'layout' prop from this div below */}
+
       <div 
         className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6"
       >
@@ -131,7 +128,7 @@ const Feed = () => {
               user={user}
               onAction={handleAction}
               onClick = {()=>navigate(`/profile/view/${user._id}`)}
-              /* 🟢 ADD 'layout' here if you want smooth removal animations */
+           
               layout 
             />
           ))}
