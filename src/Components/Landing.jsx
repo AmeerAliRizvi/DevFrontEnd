@@ -57,7 +57,7 @@ export default function LandingPage() {
         navigate("/feed");
       } catch (err) {
         // Not logged in, stay on landing
-        console.log("No active session");
+        
       }
     };
     checkSession();

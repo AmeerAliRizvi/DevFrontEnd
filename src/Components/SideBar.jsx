@@ -99,7 +99,7 @@ export default function SideBar() {
 
           <div>
             <h1 className="text-2xl font-bold text-gray-900 tracking-tight">
-              Hack<span className="text-purple-700">Mate</span>
+              Dev<span className="text-purple-700">Connect</span>
             </h1>
             <p className="text-xs text-gray-500">Find your hack partner</p>
           </div>
