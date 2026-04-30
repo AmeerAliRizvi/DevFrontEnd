@@ -4,7 +4,7 @@ function Header() {
   return (
     <nav className="fixed top-0 left-0 right-0 z-50 bg-[#0f0f0f]/70 backdrop-blur-lg px-10 py-5 flex items-center justify-between border-b border-white/10 shadow-sm">
       <h1 className="text-3xl font-extrabold text-white tracking-wider">
-        Devly
+        DevConnect
       </h1>
       <div className="space-x-6 text-sm">
         <Link

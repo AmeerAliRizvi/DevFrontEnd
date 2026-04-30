@@ -14,6 +14,7 @@ import Profile from "./Profile";
 import UserProfile from "./UserProfile";
 import Chat from "./Chat";
 import ChatPage from "./ChatPage";
+import LandingPage from "./Landing";
 
 function App() {
   return (
@@ -21,7 +22,8 @@ function App() {
 
       {/* PUBLIC ROUTES */}
       <Route element={<PublicRoute />}>
-        <Route path="/" element={<Login />} />
+        
+        <Route path="/" element={<LandingPage />} />
         <Route path="/login" element={<Login />} />
         <Route path="/signup" element={<Signup />} />
         <Route path="/verify-email" element={<VerifyEmail />} />
