@@ -2,7 +2,7 @@ import { useEffect, useState, useRef } from "react";
 import api from "../Utils/axiosClient";
 import { useNavigate, useParams } from "react-router-dom"; // Added useParams
 import { useSelector } from "react-redux";
-import { createSocketConnection } from "../utils/socket";
+import { createSocketConnection } from "../Utils/socket";
 
 const ChatSideBar = () => {
   const [users, setUsers] = useState([]);
