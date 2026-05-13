@@ -162,15 +162,15 @@ const Chat = () => {
       {/* Header */}
       <header className="flex items-center p-3 bg-[#075E54] text-white shadow-md gap-3">
         <FaArrowLeft className="md:hidden text-xl cursor-pointer" onClick={() => window.history.back()} />
-        <div className="w-10 h-10 rounded-full overflow-hidden bg-white/20 flex items-center justify-center">
+        <div className="w-8 h-8 md:w-10 md:h-10 rounded-full overflow-hidden bg-white/20 flex items-center justify-center">
           {chatAvatar ? (
             <img src={chatAvatar} alt="avatar" className="w-full h-full object-cover" />
           ) : (
-            <span className="font-bold text-white text-lg">{chatName !== "Chat" ? chatName[0] : "?"}</span>
+            <span className="font-bold text-white text-base md:text-lg">{chatName !== "Chat" ? chatName[0] : "?"}</span>
           )}
         </div>
         <div className="flex flex-col">
-          <h1 className="text-lg font-semibold leading-tight">{chatName} {passedUser?.lastName}</h1>
+          <h1 className="text-base md:text-lg font-semibold leading-tight">{chatName} {passedUser?.lastName}</h1>
         </div>
       </header>
 
@@ -181,13 +181,13 @@ const Chat = () => {
       >
         {/* Loading Spinner for Pagination */}
         {loading && page > 1 && (
-            <div className="text-center text-xs text-gray-500 py-2">Loading previous messages...</div>
+            <div className="text-center text-xs md:text-sm text-gray-500 py-2">Loading previous messages...</div>
         )}
 
         <div className="flex flex-col gap-3">
           {messages.map((msg, idx) => (
             <div key={msg._id || idx} className={`flex ${msg.sender === "user" ? "justify-end" : "justify-start"}`}>
-              <div className={`max-w-[70%] p-3 rounded-lg shadow-sm ${msg.sender === "user" ? "bg-[#DCF8C6]" : "bg-white"}`}>
+              <div className={`max-w-[85%] sm:max-w-[75%] md:max-w-[60%] p-3 rounded-lg shadow-sm ${msg.sender === "user" ? "bg-[#DCF8C6]" : "bg-white"}`}>
                 {msg.sender === "other" && <p className="text-xs font-bold text-teal-700 mb-1">{msg.firstName}</p>}
                 <p className="text-sm text-slate-800 break-words">{msg.text}</p>
                 <span className="text-xs text-slate-400 float-right mt-1 ml-2">{msg.time}</span>

@@ -18,7 +18,7 @@ const menuItems = [
 
 const MenuItem = ({ name, path, Icon, active, index }) => {
  
-  const baseClasses = "flex items-center gap-4 px-8 py-3.5 transition-all duration-300 ease-in-out cursor-pointer relative group rounded-r-xl";
+  const baseClasses = "flex items-center gap-4 px-4 md:px-6 lg:px-8 py-3.5 transition-all duration-300 ease-in-out cursor-pointer relative group rounded-r-xl";
   
 
   const iconClasses = "w-15 h-15 transition-all duration-300 ease-in-out";
@@ -61,7 +61,7 @@ const MenuItem = ({ name, path, Icon, active, index }) => {
             aria-hidden="true"
           />
 
-          <span className="text-lg">
+          <span className="text-base md:text-lg">
             {name}
           </span>
         </motion.div>
@@ -76,7 +76,7 @@ export default function SideBar() {
   const location = useLocation();
 
   const sidebarClasses = `
-    w-72 h-screen bg-[#faf7ff]
+    w-full md:w-64 lg:w-72 h-screen bg-[#faf7ff]
     flex flex-col
     font-inter
     shadow-[6px_0_30px_rgba(150,120,200,0.12)] sticky top-0
@@ -85,7 +85,7 @@ export default function SideBar() {
   return (
     <div className={sidebarClasses} aria-label="Main Navigation Sidebar">
       
-      <div className="px-8 pt-12 pb-10">
+      <div className="px-4 md:px-6 lg:px-8 pt-8 md:pt-10 lg:pt-12 pb-10">
         <div className="flex items-center gap-3">
           <div className="
             w-12 h-12 rounded-xl 
@@ -98,7 +98,7 @@ export default function SideBar() {
           </div>
 
           <div>
-            <h1 className="text-2xl font-bold text-gray-900 tracking-tight">
+            <h1 className="text-xl md:text-2xl font-bold text-gray-900 tracking-tight">
               Dev<span className="text-purple-700">Connect</span>
             </h1>
             <p className="text-xs text-gray-500">Find your hack partner</p>
@@ -106,7 +106,7 @@ export default function SideBar() {
         </div>
       </div>
 
-      <hr className="mx-8 border-t border-[#ede7f6] mb-2" aria-hidden="true" />
+      <hr className="mx-4 md:mx-6 lg:mx-8 border-t border-[#ede7f6] mb-2" aria-hidden="true" />
 
       <nav className="flex flex-col gap-1" role="navigation" aria-label="Main Menu">
         <ul role="list">
@@ -126,7 +126,7 @@ export default function SideBar() {
       <div className="flex-1" aria-hidden="true" /> 
 
       {/* 👤 Profile Section */}
-      <div className="px-8 py-8 border-t border-[#ede7f6]">
+      <div className="px-4 md:px-6 lg:px-8 py-8 border-t border-[#ede7f6]">
         <NavLink to="/profile">
           {({ isActive }) => (
             <div

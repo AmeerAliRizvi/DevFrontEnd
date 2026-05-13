@@ -116,10 +116,10 @@ const Feed = () => {
     <div className="min-h-screen bg-[#FAFAFA] pb-20">
     <SearchUsers />
 
-    <div className="max-w-7xl mx-auto px-4 py-8">
+    <div className="max-w-7xl mx-auto px-3 md:px-4 lg:px-6 py-4 md:py-8">
 
       <div 
-        className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6"
+        className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 md:gap-5 lg:gap-6"
       >
         <AnimatePresence mode="popLayout">
           {feed.map((user) => (

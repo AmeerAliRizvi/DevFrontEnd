@@ -34,7 +34,7 @@ const UserCard = ({ user, onAction, onClick }) => {
       animate={{ opacity: 1, y: 0 }}
       whileHover={{ y: -5 }}
       onClick={onClick}
-      className="group relative w-full max-w-[320px] mx-auto bg-white rounded-[24px] overflow-hidden shadow-lg shadow-gray-100 border border-gray-100 flex flex-col h-full"
+      className="group relative w-full max-w-xs sm:max-w-sm mx-auto bg-white rounded-[24px] overflow-hidden shadow-lg shadow-gray-100 border border-gray-100 flex flex-col h-full"
     >
       
       <div className={`h-24 w-full relative transition-colors duration-300 ${isInTeam ? 'bg-amber-50' : 'bg-purple-50'}`}>
@@ -56,7 +56,7 @@ const UserCard = ({ user, onAction, onClick }) => {
         </div>
       </div>
 
-      <div className="px-5 relative flex flex-col items-center -mt-12 flex-1">
+      <div className="px-3 md:px-5 relative flex flex-col items-center -mt-12 flex-1">
         
         <div className="mb-3">
           <div className="p-1.5 bg-white rounded-2xl shadow-sm">
@@ -69,7 +69,7 @@ const UserCard = ({ user, onAction, onClick }) => {
           </div>
         </div>
         <div className="text-center w-full">
-          <h2 className="text-xl font-bold text-gray-900 truncate px-1">
+          <h2 className="text-lg md:text-xl font-bold text-gray-900 truncate px-1">
             {firstName} {lastName}
           </h2>
           
@@ -87,7 +87,7 @@ const UserCard = ({ user, onAction, onClick }) => {
         </div>
 
         {/* Skills */}
-        <div className="w-full flex flex-wrap justify-center gap-2 mt-5 mb-6">
+        <div className="w-full flex flex-wrap justify-center gap-1.5 md:gap-2 mt-5 mb-6">
           {safeSkills.length > 0 ? (
             <>
               {displaySkills.map((skill, i) => (
@@ -120,7 +120,7 @@ const UserCard = ({ user, onAction, onClick }) => {
       </div>
 
       {/* --- ACTIONS --- */}
-      <div className="p-4 pt-0 mt-auto flex gap-3">
+      <div className="p-3 md:p-4 pt-0 mt-auto flex gap-3">
         
         {/* Pass Button */}
         <button 

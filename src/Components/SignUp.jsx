@@ -43,12 +43,12 @@ export default function Signup() {
     <div className="relative min-h-screen flex items-center justify-center overflow-hidden bg-gray-50">
 
       {/* Background */}
-      <div className="absolute -top-40 -left-40 w-[500px] h-[500px] bg-purple-300/30 rounded-full blur-3xl" />
-      <div className="absolute top-1/3 -right-40 w-[400px] h-[400px] bg-violet-300/30 rounded-full blur-3xl" />
-      <div className="absolute -bottom-40 left-1/3 w-[450px] h-[450px] bg-fuchsia-300/20 rounded-full blur-3xl" />
+      <div className="absolute -top-20 md:-top-40 -left-20 md:-left-40 w-[300px] h-[300px] md:w-[500px] md:h-[500px] bg-purple-300/30 rounded-full blur-3xl" />
+      <div className="absolute top-1/3 -right-20 md:-right-40 w-[250px] h-[250px] md:w-[400px] md:h-[400px] bg-violet-300/30 rounded-full blur-3xl" />
+      <div className="absolute -bottom-20 md:-bottom-40 left-1/3 w-[280px] h-[280px] md:w-[450px] md:h-[450px] bg-fuchsia-300/20 rounded-full blur-3xl" />
 
       {/* Card */}
-      <div className="relative z-10 w-full max-w-md bg-white/90 backdrop-blur-xl border border-gray-200 rounded-2xl p-8 shadow-lg">
+      <div className="relative z-10 w-full max-w-md bg-white/90 backdrop-blur-xl border border-gray-200 rounded-2xl p-6 md:p-8 shadow-lg">
 
         <div className="mb-8">
           <h1 className="text-2xl font-semibold text-gray-900">
@@ -67,7 +67,7 @@ export default function Signup() {
 
         <form onSubmit={handleSubmit} className="space-y-4">
           {/* Name */}
-          <div className="grid grid-cols-2 gap-3">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
             <input
               name="firstName"
               placeholder="First name"
@@ -107,7 +107,7 @@ export default function Signup() {
           />
 
           {/* Age & Gender */}
-          <div className="grid grid-cols-2 gap-3">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
             <input
               name="age"
               placeholder="Age (optional)"

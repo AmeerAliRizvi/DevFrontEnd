@@ -24,7 +24,7 @@ const Card = ({ children, className = "" }) => (
 
 // Component: Section Label
 const Label = ({ children }) => (
-    <span className="text-[10px] font-bold text-gray-400 uppercase tracking-wider block mb-1.5 ml-1">
+    <span className="text-[9px] md:text-[10px] font-bold text-gray-400 uppercase tracking-wider block mb-1.5 ml-1">
         {children}
     </span>
 );
@@ -167,7 +167,7 @@ export default function UserProfilePage() {
     );
 
     return (
-        <div className="min-h-screen bg-[#FAFAFA] p-6 md:p-12 font-inter flex justify-center text-gray-800">
+        <div className="min-h-screen bg-[#FAFAFA] p-4 md:p-6 lg:p-12 font-inter flex justify-center text-gray-800">
             
             {/* Toast Notification */}
             <Toast message={toast.message} type={toast.type} onClose={() => setToast({ message: null, type: '' })} />
@@ -175,13 +175,13 @@ export default function UserProfilePage() {
             <div className="max-w-6xl w-full space-y-6">
 
                 {/* --- 1. HEADER CARD --- */}
-                <Card className="p-8 relative overflow-hidden group">
+                <Card className="p-4 md:p-6 lg:p-8 relative overflow-hidden group">
                     <div className="absolute -top-24 -right-24 w-96 h-96 bg-purple-100 rounded-full blur-3xl opacity-50 pointer-events-none transition-opacity group-hover:opacity-70" />
                     
                     <div className="flex flex-col md:flex-row items-center md:items-start gap-8 relative z-10">
                         {/* Avatar */}
                         <div className="relative group/avatar shrink-0">
-                            <div className="w-36 h-36 rounded-full overflow-hidden shadow-lg border-4 border-white ring-1 ring-gray-100 bg-gray-50">
+                            <div className="w-28 h-28 md:w-36 md:h-36 lg:w-40 lg:h-40 rounded-full overflow-hidden shadow-lg border-4 border-white ring-1 ring-gray-100 bg-gray-50">
                                 <img 
                                     src={isEditing ? formData.photoUrl : user.photoUrl} 
                                     alt="Profile" 
@@ -204,15 +204,15 @@ export default function UserProfilePage() {
                                 {isEditing ? (
                                     <div className="space-y-3 animate-fade-in-up">
                                         <div className="flex flex-col md:flex-row gap-3">
-                                            <input name="firstName" value={formData.firstName} onChange={handleChange} placeholder="First Name" className="text-2xl font-bold bg-white border border-gray-300 focus:border-purple-500 focus:ring-2 focus:ring-purple-100 rounded-xl px-4 py-2 outline-none w-full transition-all"/>
-                                            <input name="lastName" value={formData.lastName} onChange={handleChange} placeholder="Last Name" className="text-2xl font-bold bg-white border border-gray-300 focus:border-purple-500 focus:ring-2 focus:ring-purple-100 rounded-xl px-4 py-2 outline-none w-full transition-all"/>
+                                            <input name="firstName" value={formData.firstName} onChange={handleChange} placeholder="First Name" className="text-lg md:text-xl lg:text-2xl font-bold bg-white border border-gray-300 focus:border-purple-500 focus:ring-2 focus:ring-purple-100 rounded-xl px-4 py-2 outline-none w-full transition-all"/>
+                                            <input name="lastName" value={formData.lastName} onChange={handleChange} placeholder="Last Name" className="text-lg md:text-xl lg:text-2xl font-bold bg-white border border-gray-300 focus:border-purple-500 focus:ring-2 focus:ring-purple-100 rounded-xl px-4 py-2 outline-none w-full transition-all"/>
                                         </div>
-                                        <input name="title" value={formData.title} onChange={handleChange} className="text-purple-600 font-medium bg-white border border-gray-300 focus:border-purple-500 rounded-xl px-4 py-2 w-full md:max-w-md" placeholder="e.g. Full Stack Developer"/>
+                                        <input name="title" value={formData.title} onChange={handleChange} className="text-sm md:text-base text-purple-600 font-medium bg-white border border-gray-300 focus:border-purple-500 rounded-xl px-4 py-2 w-full md:max-w-md" placeholder="e.g. Full Stack Developer"/>
                                     </div>
                                 ) : (
                                     <>
-                                        <h1 className="text-4xl font-extrabold text-gray-900 tracking-tight">{user.firstName} {user.lastName}</h1>
-                                        <p className="text-lg text-purple-600 font-medium">{user.title || <span className="text-gray-400 italic font-normal text-base">No title added</span>}</p>
+                                        <h1 className="text-2xl md:text-3xl lg:text-4xl font-extrabold text-gray-900 tracking-tight">{user.firstName} {user.lastName}</h1>
+                                        <p className="text-base md:text-lg text-purple-600 font-medium">{user.title || <span className="text-gray-400 italic font-normal text-sm md:text-base">No title added</span>}</p>
                                     </>
                                 )}
                             </div>
@@ -270,7 +270,7 @@ export default function UserProfilePage() {
                     {/* LEFT SIDEBAR */}
                     <div className="space-y-6">
                         {/* Personal Details */}
-                        <Card className="p-6">
+                        <Card className="p-4 md:p-6">
                             <div className="flex items-center gap-2 mb-6 text-gray-900">
                                 <Activity size={20} className="text-purple-600"/>
                                 <h3 className="font-bold text-lg">Personal Details</h3>

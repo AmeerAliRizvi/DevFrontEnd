@@ -5,7 +5,6 @@ import { addUser } from "../Utils/userSlice";
 import api from "../Utils/axiosClient";
 import Header from "./Header";
 import { motion } from "framer-motion";
-import MergeGraphicSection from "./MergeGraphicSection";
 import { Canvas } from "@react-three/fiber";
 import { OrbitControls } from "@react-three/drei";
 import * as THREE from "three";
@@ -76,27 +75,25 @@ export default function LandingPage() {
         </div>
 
         <motion.div
-          className="z-10 text-center px-6"
+          className="z-10 text-center px-4 md:px-6"
           initial={{ opacity: 0, y: -50 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 1 }}
         >
-          <h1 className="text-5xl font-extrabold leading-tight bg-gradient-to-r from-green-400 to-blue-500 bg-clip-text text-transparent">
+          <h1 className="text-3xl md:text-4xl lg:text-5xl font-extrabold leading-tight bg-gradient-to-r from-green-400 to-blue-500 bg-clip-text text-transparent">
             Build Your Dream Hackathon Team
           </h1>
-          <p className="mt-4 text-lg text-gray-300 max-w-2xl mx-auto">
+          <p className="mt-4 text-base md:text-lg text-gray-300 max-w-lg md:max-w-2xl mx-auto">
             Connect, collaborate, and conquer hackathons with the perfect teammates.
           </p>
           <motion.button
             whileHover={{ scale: 1.05, boxShadow: "0px 0px 20px rgba(34,197,94,0.8)" }}
-            className="mt-8 px-6 py-3 bg-green-500 rounded-lg font-semibold hover:bg-green-600 transition"
+            className="mt-8 px-6 py-3 bg-green-500 rounded-lg font-semibold hover:bg-green-600 transition text-sm md:text-base"
           >
             <Link to="/login">Get Started</Link>
           </motion.button>
         </motion.div>
       </section>
-
-      <MergeGraphicSection />
 
       {/* Other sections same as before */}
     </div>

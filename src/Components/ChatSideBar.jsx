@@ -91,8 +91,8 @@ const ChatSideBar = () => {
 
   return (
     <div className="w-full h-full flex flex-col bg-white">
-      <div className="p-4 bg-slate-100 border-b border-slate-200">
-        <h2 className="text-xl font-bold text-slate-700">Chats</h2>
+      <div className="p-3 md:p-4 bg-slate-100 border-b border-slate-200">
+        <h2 className="text-lg md:text-xl font-bold text-slate-700">Chats</h2>
       </div>
 
       <div className="overflow-y-auto flex-1">
@@ -104,11 +104,11 @@ const ChatSideBar = () => {
               key={chatUser._id}
               onClick={() => handleUserClick(chatUser)}
              
-              className={`flex items-center gap-3 p-4 cursor-pointer border-b border-slate-100 ${
+              className={`flex items-center gap-3 p-3 md:p-4 cursor-pointer border-b border-slate-100 ${
                   toUserId === chatUser._id ? "bg-slate-200" : "hover:bg-slate-50"
               }`}
             >
-              <div className="w-12 h-12 rounded-full overflow-hidden bg-slate-200 flex items-center justify-center">
+              <div className="w-10 h-10 md:w-12 md:h-12 rounded-full overflow-hidden bg-slate-200 flex items-center justify-center">
                 {chatUser.photoUrl ? (
                   <img
                     src={chatUser.photoUrl}
@@ -124,10 +124,10 @@ const ChatSideBar = () => {
 
               <div className="flex-1 min-w-0">
                 <div className="flex justify-between items-baseline">
-                  <h3 className="font-semibold text-slate-800 truncate">
+                  <h3 className="font-semibold text-sm md:text-base text-slate-800 truncate">
                     {chatUser.firstName} {chatUser.lastName}
                   </h3>
-                  <span className="text-xs text-slate-400 whitespace-nowrap ml-2">
+                  <span className="text-xs md:text-sm text-slate-400 whitespace-nowrap ml-2">
                     {formatTime(chatUser.lastMessageTime)}
                   </span>
                 </div>

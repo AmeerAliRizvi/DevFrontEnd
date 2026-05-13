@@ -120,13 +120,13 @@ const RequestCard = ({ req, onReview, onClick }) => {
       exit={{ opacity: 0, x: -50, transition: { duration: 0.2 } }}
 
       onClick={onClick}
-      className="cursor-pointer group bg-white rounded-2xl p-5 sm:p-6 border border-gray-100 shadow-sm hover:shadow-xl hover:border-purple-100 transition-all duration-300 flex flex-col sm:flex-row items-center gap-6"
+      className="cursor-pointer group bg-white rounded-2xl p-3 md:p-5 lg:p-6 border border-gray-100 shadow-sm hover:shadow-xl hover:border-purple-100 transition-all duration-300 flex flex-col sm:flex-row items-center gap-4 md:gap-6"
     >
       <div className="relative shrink-0">
         <img
           src={photoUrl}
           alt={firstName}
-          className="w-20 h-20 sm:w-24 sm:h-24 rounded-full object-cover border-[3px] border-purple-100"
+          className="w-16 h-16 sm:w-20 sm:h-20 md:w-24 md:h-24 rounded-full object-cover border-[3px] border-purple-100"
           onError={(e) => { e.target.src = 'via.placeholder.com'; }}
         />
       </div>
@@ -163,7 +163,7 @@ const RequestCard = ({ req, onReview, onClick }) => {
             e.stopPropagation();
             onReview("accepted", req);
           }}
-          className="flex-1 sm:flex-none w-full sm:w-36 flex items-center justify-center gap-2 bg-purple-600 hover:bg-purple-700 text-white py-2.5 px-4 rounded-xl font-semibold shadow-md shadow-purple-100 transition-all"
+          className="flex-1 sm:flex-none w-full sm:w-28 md:w-36 flex items-center justify-center gap-2 bg-purple-600 hover:bg-purple-700 text-white py-2.5 px-4 rounded-xl font-semibold shadow-md shadow-purple-100 transition-all"
         >
           <Check size={18} /> Accept
         </button>
@@ -173,7 +173,7 @@ const RequestCard = ({ req, onReview, onClick }) => {
             e.stopPropagation(); 
             onReview("rejected", req);
           }}
-          className="flex-1 sm:flex-none w-full sm:w-36 flex items-center justify-center gap-2 bg-white border border-gray-200 text-gray-500 hover:text-red-600 hover:border-red-200 hover:bg-red-50 py-2.5 px-4 rounded-xl font-medium transition-all"
+          className="flex-1 sm:flex-none w-full sm:w-28 md:w-36 flex items-center justify-center gap-2 bg-white border border-gray-200 text-gray-500 hover:text-red-600 hover:border-red-200 hover:bg-red-50 py-2.5 px-4 rounded-xl font-medium transition-all"
         >
           <X size={18} /> Reject
         </button>

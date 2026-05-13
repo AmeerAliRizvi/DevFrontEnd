@@ -10,14 +10,14 @@ const ChatPage = () => {
     
       <div className={`
         ${toUserId ? "hidden" : "flex"} 
-        md:flex w-full md:w-1/3 lg:w-1/4 h-full border-r border-slate-300 bg-white z-10
+        md:flex w-full md:w-1/2 lg:w-1/3 xl:w-1/4 h-full border-r border-slate-300 bg-white z-10
       `}>
         <ChatSideBar />
       </div>
 
       <div className={`
         ${!toUserId ? "hidden" : "flex"} 
-        md:flex w-full md:w-2/3 lg:w-3/4 h-full bg-[#E5DDD5]
+        md:flex w-full md:w-1/2 lg:w-2/3 xl:w-3/4 h-full bg-[#E5DDD5]
       `}>
         {toUserId ? (
           <Chat />

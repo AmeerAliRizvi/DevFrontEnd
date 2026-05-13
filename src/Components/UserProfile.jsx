@@ -82,7 +82,7 @@ const UserProfile = () => {
              
                 <Card className="p-0 overflow-hidden group">
                     {/* Decorative Banner */}
-                    <div className="h-32 bg-gradient-to-r from-violet-600 to-indigo-600 relative overflow-hidden">
+                    <div className="h-24 md:h-28 lg:h-32 bg-gradient-to-r from-violet-600 to-indigo-600 relative overflow-hidden">
                         <div className="absolute inset-0 opacity-20 pattern-grid-lg"></div>
                         <div className="absolute -bottom-10 -left-10 w-40 h-40 bg-white/20 rounded-full blur-2xl"></div>
                     </div>
@@ -197,7 +197,7 @@ const UserProfile = () => {
                                 </h3>
                                 
                                 {user.skills && user.skills.length > 0 ? (
-                                    <div className="flex flex-wrap gap-3">
+                                    <div className="flex flex-wrap gap-2 md:gap-3">
                                         {user.skills.map((skill, index) => (
                                             <span 
                                                 key={index} 
