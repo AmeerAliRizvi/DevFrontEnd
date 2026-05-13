@@ -7,7 +7,7 @@ import {
     Briefcase, Edit2, Save, Camera, Code, Activity, Plus, 
     Loader2, XCircle, CheckCircle, AlertCircle
 } from 'lucide-react';
-import api from '../utils/axiosClient';
+import api from '../Utils/axiosClient';
 
 
 const ensureProtocol = (url) => {

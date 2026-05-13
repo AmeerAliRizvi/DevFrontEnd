@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
-import api from '../utils/axiosClient'; // Your axios instance
+import api from '../Utils/axiosClient'; // Your axios instance
 import { 
     Mail, Github, Linkedin, Briefcase, Link as LinkIcon, 
     MapPin, Calendar, UserPlus, UserCheck, X, Check, 

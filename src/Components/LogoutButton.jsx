@@ -2,7 +2,7 @@ import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { removeUser } from "../Utils/userSlice";
 import { useState } from "react";
-import api from "../utils/axiosClient";
+import api from "../Utils/axiosClient";
 import ConfirmLogoutModal from "./ConfirmLogoutModal";
 
 const LogoutButton = () => {

@@ -1,5 +1,5 @@
 import { useEffect, useState, useRef } from "react";
-import api from "../utils/axiosClient";
+import api from "../Utils/axiosClient";
 import { useNavigate, useParams } from "react-router-dom"; // Added useParams
 import { useSelector } from "react-redux";
 import { createSocketConnection } from "../utils/socket";

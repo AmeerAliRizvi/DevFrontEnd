@@ -227,7 +227,6 @@ export default function MergeGraphicSection({ cols = 5, rows = 3, pieceSize = 96
       <div className="max-w-6xl w-full">
         <h3 className="text-3xl font-bold text-center text-green-400 mb-3">Signature Merge</h3>
         <p className="text-center text-gray-300 mb-8 max-w-2xl mx-auto">
-          Pieces fly together as you scroll — replace colored tiles with sliced images later.
         </p>
 
         <div

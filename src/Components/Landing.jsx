@@ -2,7 +2,7 @@ import { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { useNavigate, Link } from "react-router-dom";
 import { addUser } from "../Utils/userSlice";
-import api from "../utils/axiosClient";
+import api from "../Utils/axiosClient";
 import Header from "./Header";
 import { motion } from "framer-motion";
 import MergeGraphicSection from "./MergeGraphicSection";

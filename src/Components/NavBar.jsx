@@ -3,7 +3,7 @@ import { Link, useNavigate } from "react-router-dom";
 
 import { removeUser } from "../Utils/userSlice";
 import axios from "axios";
-import api from "../utils/axiosClient";
+import api from "../Utils/axiosClient";
 
 const NavBar = () => {
   const user = useSelector((store) => store.user);

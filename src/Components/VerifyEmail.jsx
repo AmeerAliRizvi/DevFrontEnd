@@ -1,5 +1,5 @@
 import { useLocation, useNavigate } from "react-router-dom";
-import api from "../utils/axiosClient";
+import api from "../Utils/axiosClient";
 import { useDispatch } from "react-redux";
 import { addUser } from "../Utils/userSlice";
 import { useEffect, useRef, useState } from "react";

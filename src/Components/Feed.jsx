@@ -2,7 +2,7 @@
 import React, { useEffect, useState, useCallback, useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { addFeed, removeUserFromFeed } from "../Utils/feedSlice";
-import api from "../utils/axiosClient";
+import api from "../Utils/axiosClient";
 import { motion, AnimatePresence } from "framer-motion";
 import { Loader2, Code2 } from "lucide-react";
 import UserCard from "./UserCard";

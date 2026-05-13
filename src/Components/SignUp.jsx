@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
-import api from "../utils/axiosClient";
+import api from "../Utils/axiosClient";
 
 export default function Signup() {
   const [form, setForm] = useState({

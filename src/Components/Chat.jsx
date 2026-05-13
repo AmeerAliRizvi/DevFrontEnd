@@ -1,10 +1,10 @@
 import { useEffect, useState, useRef, useLayoutEffect } from "react"; 
 import { useSelector } from "react-redux";
-import { createSocketConnection } from "../utils/socket";
+import { createSocketConnection } from "../Utils/socket";
 import { useParams, useLocation } from "react-router-dom";
 import { IoSend } from "react-icons/io5";
 import { FaArrowLeft } from "react-icons/fa";
-import api from "../utils/axiosClient";
+import api from "../Utils/axiosClient";
 
 const formatTime = (isoString) => {
   if (!isoString) return "";

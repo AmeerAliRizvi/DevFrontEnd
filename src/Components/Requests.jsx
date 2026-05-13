@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { addRequest, removeRequest } from "../Utils/requestSlice"; 
 import { addOneConnection } from "../Utils/connectionSlice";     
-import api from "../utils/axiosClient";
+import api from "../Utils/axiosClient";
 import { Check, X, ShieldAlert, Cpu } from "lucide-react"; 
 import { motion, AnimatePresence } from "framer-motion";
 import { useNavigate } from "react-router-dom";
